@@ -67,6 +67,15 @@ def validate_whole_hours(time):
             raise ValueError("'start_time' and 'end_time' must be expressed in whole hours.")
 
 
+def is_date(string):
+    from dateutil.parser import parse
+    try:
+        parse(string, fuzzy=False)
+        return True
+    except ValueError:
+        return False
+
+
 def extract_response_headers(headers):
     values = {}
 

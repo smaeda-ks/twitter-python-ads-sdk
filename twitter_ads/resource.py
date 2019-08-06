@@ -10,7 +10,9 @@ except ImportError:
     from urlparse import urlparse
 import json
 
-from twitter_ads.utils import format_time, to_time, validate_whole_hours
+from twitter_ads.utils import (
+    format_time, to_time, validate_whole_hours, is_date
+)
 from twitter_ads.enum import ENTITY, GRANULARITY, PLACEMENT, TRANSFORM
 from twitter_ads.http import Request
 from twitter_ads.cursor import Cursor
@@ -20,7 +22,7 @@ from twitter_ads.utils import extract_response_headers
 
 def resource_property(klass, name, **kwargs):
     """Builds a resource object property."""
-    klass.PROPERTIES[name] = kwargs
+    klass.PROPERTIES.append(name)
 
     def getter(self):
         return getattr(self, '_%s' % name, kwargs.get('default', None))
@@ -39,6 +41,12 @@ class Resource(object):
     def __init__(self, account):
         self._account = account
 
+    def __getattr__(self, name):
+        try:
+            return getattr(self, '_%s' % name)
+        except Exception:
+            return None
+
     @property
     def account(self):
         return self._account
@@ -49,6 +57,9 @@ class Resource(object):
         This helper handles all necessary type coercions as it assigns
         attribute values.
         """
+        for i in response.keys():
+            self.PROPERTIES.append(str(i))
+
         if headers is not None:
             limits = extract_response_headers(headers)
             for k in limits:
@@ -56,10 +67,7 @@ class Resource(object):
 
         for name in self.PROPERTIES:
             attr = '_{0}'.format(name)
-            transform = self.PROPERTIES[name].get('transform', None)
             value = response.get(name, None)
-            if transform and transform == TRANSFORM.TIME and value:
-                setattr(self, attr, dateutil.parser.parse(value))
             if isinstance(value, int) and value == 0:
                 continue  # skip attribute
             else:
@@ -222,7 +230,7 @@ class Analytics(Resource):
     """
     Container for all analytics related logic used by API resource objects.
     """
-    PROPERTIES = {}
+    PROPERTIES = []
 
     ANALYTICS_MAP = {
         'Campaign': ENTITY.CAMPAIGN,
@@ -349,14 +357,3 @@ class Analytics(Resource):
         resource = klass.RESOURCE_ACTIVE_ENTITIES.format(account_id=account.id)
         response = Request(account.client, 'get', resource, params=params).perform()
         return response.body['data']
-
-
-# async_stats_job_result() properties
-# read-only
-resource_property(Analytics, 'id', readonly=True)
-resource_property(Analytics, 'id_str', readonly=True)
-resource_property(Analytics, 'status', readonly=True)
-resource_property(Analytics, 'url', readonly=True)
-resource_property(Analytics, 'created_at', readonly=True)
-resource_property(Analytics, 'expires_at', readonly=True)
-resource_property(Analytics, 'updated_at', readonly=True)

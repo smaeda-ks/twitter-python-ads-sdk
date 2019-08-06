@@ -14,7 +14,7 @@ import json
 
 class TailoredAudience(Resource):
 
-    PROPERTIES = {}
+    PROPERTIES = []
     RESOURCE_COLLECTION = '/' + API_VERSION + '/accounts/{account_id}/tailored_audiences'
     RESOURCE = '/' + API_VERSION + '/accounts/{account_id}/tailored_audiences/{id}'
     RESOURCE_USERS = '/' + API_VERSION + '/accounts/{account_id}/tailored_audiences/\
@@ -75,27 +75,9 @@ class TailoredAudience(Resource):
         return self.from_response(response.body['data'])
 
 
-# tailored audience properties
-# read-only
-resource_property(TailoredAudience, 'id', readonly=True)
-resource_property(TailoredAudience, 'created_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(TailoredAudience, 'updated_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(TailoredAudience, 'deleted', readonly=True, transform=TRANSFORM.BOOL)
-resource_property(TailoredAudience, 'audience_size', readonly=True)
-resource_property(TailoredAudience, 'audience_type', readonly=True)
-resource_property(TailoredAudience, 'metadata', readonly=True)
-resource_property(TailoredAudience, 'partner_source', readonly=True)
-resource_property(TailoredAudience, 'reasons_not_targetable', readonly=True)
-resource_property(TailoredAudience, 'targetable', readonly=True)
-resource_property(TailoredAudience, 'targetable_types', readonly=True)
-# writable
-resource_property(TailoredAudience, 'name')
-resource_property(TailoredAudience, 'list_type')
-
-
 class TailoredAudiencePermission(Resource):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     RESOURCE_COLLECTION = '/' + API_VERSION + '/accounts/{account_id}/tailored_audiences/'
     RESOURCE_COLLECTION += '{tailored_audience_id}/permissions'
@@ -139,21 +121,9 @@ class TailoredAudiencePermission(Resource):
         return self.from_response(response.body['data'])
 
 
-# tailored audience permission properties
-# read-only
-resource_property(TailoredAudiencePermission, 'id', readonly=True)
-resource_property(TailoredAudiencePermission, 'created_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(TailoredAudiencePermission, 'updated_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(TailoredAudiencePermission, 'deleted', readonly=True, transform=TRANSFORM.BOOL)
-# writable
-resource_property(TailoredAudiencePermission, 'tailored_audience_id')
-resource_property(TailoredAudiencePermission, 'granted_account_id')
-resource_property(TailoredAudiencePermission, 'permission_level')
-
-
 class AudienceIntelligence(Resource):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     RESOURCE_BASE = '/' + API_VERSION + '/accounts/{account_id}/audience_intelligence/'
     RESOURCE_CONVERSATIONS = RESOURCE_BASE + 'conversations'
@@ -198,18 +168,3 @@ class AudienceIntelligence(Resource):
             self.account.client, self.METHOD,
             resource, headers=self.HEADERS, body=json.dumps(body)).perform()
         return response.body['data']
-
-
-# tailored audience permission properties
-# read-only
-resource_property(AudienceIntelligence, 'operator_type', readonly=True)
-resource_property(AudienceIntelligence, 'targeting_type', readonly=True)
-resource_property(AudienceIntelligence, 'targeting_value', readonly=True)
-resource_property(AudienceIntelligence, 'localized', readonly=True)
-# writable
-resource_property(AudienceIntelligence, 'conversation_type')
-resource_property(AudienceIntelligence, 'targeting_inputs')
-resource_property(AudienceIntelligence, 'audience_definition')
-# demographics only
-resource_property(AudienceIntelligence, 'start_time', transform=TRANSFORM.TIME)
-resource_property(AudienceIntelligence, 'end_time', transform=TRANSFORM.TIME)

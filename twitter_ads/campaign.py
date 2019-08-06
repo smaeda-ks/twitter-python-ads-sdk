@@ -11,7 +11,7 @@ from twitter_ads import API_VERSION
 
 class TargetingCriteria(Resource, Persistence, Batch):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     BATCH_RESOURCE_COLLECTION = '/' + API_VERSION + '/batch/accounts/{account_id}/\
 targeting_criteria'
@@ -129,76 +129,29 @@ targeting_criteria'
         return Cursor(None, request)
 
 
-# targeting criteria properties
-# read-only
-resource_property(TargetingCriteria, 'id', readonly=True)
-resource_property(TargetingCriteria, 'name', readonly=True)
-resource_property(TargetingCriteria, 'localized_name', readonly=True)
-resource_property(TargetingCriteria, 'created_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(TargetingCriteria, 'updated_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(TargetingCriteria, 'deleted', readonly=True, transform=TRANSFORM.BOOL)
-# writable
-resource_property(TargetingCriteria, 'line_item_id')
-resource_property(TargetingCriteria, 'operator_type')
-resource_property(TargetingCriteria, 'targeting_type')
-resource_property(TargetingCriteria, 'targeting_value')
-resource_property(TargetingCriteria, 'tailored_audience_expansion')
-resource_property(TargetingCriteria, 'tailored_audience_type')
 # sdk-only
 resource_property(TargetingCriteria, 'to_delete', transform=TRANSFORM.BOOL)
 
 
 class FundingInstrument(Analytics, Resource, Persistence):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     RESOURCE_COLLECTION = '/' + API_VERSION + '/accounts/{account_id}/funding_instruments'
     RESOURCE = '/' + API_VERSION + '/accounts/{account_id}/funding_instruments/{id}'
 
 
-# funding instrument properties
-# read-only
-resource_property(FundingInstrument, 'id', readonly=True)
-resource_property(FundingInstrument, 'name', readonly=True)
-resource_property(FundingInstrument, 'credit_limit_local_micro', readonly=True)
-resource_property(FundingInstrument, 'currency', readonly=True)
-resource_property(FundingInstrument, 'description', readonly=True)
-resource_property(FundingInstrument, 'funded_amount_local_micro', readonly=True)
-resource_property(FundingInstrument, 'type', readonly=True)
-resource_property(FundingInstrument, 'created_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(FundingInstrument, 'updated_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(FundingInstrument, 'deleted', readonly=True, transform=TRANSFORM.BOOL)
-resource_property(FundingInstrument, 'able_to_fund', readonly=True, transform=TRANSFORM.BOOL)
-resource_property(FundingInstrument, 'entity_status', readonly=True)
-resource_property(FundingInstrument, 'io_header', readonly=True)
-resource_property(FundingInstrument, 'reasons_not_able_to_fund', readonly=True,
-                  transform=TRANSFORM.LIST)
-resource_property(FundingInstrument, 'start_time', readonly=True)
-resource_property(FundingInstrument, 'end_time', readonly=True)
-resource_property(FundingInstrument, 'credit_remaining_local_micro', readonly=True)
-
-
 class PromotableUser(Resource):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     RESOURCE_COLLECTION = '/' + API_VERSION + '/accounts/{account_id}/promotable_users'
     RESOURCE = '/' + API_VERSION + '/accounts/{account_id}/promotable_users/{id}'
 
 
-# promotable user properties
-# read-only
-resource_property(PromotableUser, 'id', readonly=True)
-resource_property(PromotableUser, 'promotable_user_type', readonly=True)
-resource_property(PromotableUser, 'user_id', readonly=True)
-resource_property(PromotableUser, 'created_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(PromotableUser, 'updated_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(PromotableUser, 'deleted', readonly=True, transform=TRANSFORM.BOOL)
-
-
 class AppList(Resource, Persistence):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     RESOURCE_COLLECTION = '/' + API_VERSION + '/accounts/{account_id}/app_lists'
     RESOURCE = '/' + API_VERSION + '/accounts/{account_id}/app_lists/{id}'
@@ -219,49 +172,22 @@ class AppList(Resource, Persistence):
         return self._apps
 
 
-# app list properties
-# read-only
-resource_property(AppList, 'id', readonly=True)
-resource_property(AppList, 'name', readonly=True)
-resource_property(AppList, 'apps', readonly=True)
-
-
 class Campaign(Analytics, Resource, Persistence, Batch):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     BATCH_RESOURCE_COLLECTION = '/' + API_VERSION + '/batch/accounts/{account_id}/campaigns'
     RESOURCE_COLLECTION = '/' + API_VERSION + '/accounts/{account_id}/campaigns'
     RESOURCE = '/' + API_VERSION + '/accounts/{account_id}/campaigns/{id}'
 
 
-# campaign properties
-# read-only
-resource_property(Campaign, 'created_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(Campaign, 'currency', readonly=True)
-resource_property(Campaign, 'deleted', readonly=True, transform=TRANSFORM.BOOL)
-resource_property(Campaign, 'id', readonly=True)
-resource_property(Campaign, 'reasons_not_servable', readonly=True)
-resource_property(Campaign, 'servable', readonly=True, transform=TRANSFORM.BOOL)
-resource_property(Campaign, 'updated_at', readonly=True, transform=TRANSFORM.TIME)
-# writable
-resource_property(Campaign, 'daily_budget_amount_local_micro')
-resource_property(Campaign, 'duration_in_days', transform=TRANSFORM.INT)
-resource_property(Campaign, 'end_time', transform=TRANSFORM.TIME)
-resource_property(Campaign, 'entity_status')
-resource_property(Campaign, 'frequency_cap', transform=TRANSFORM.INT)
-resource_property(Campaign, 'funding_instrument_id')
-resource_property(Campaign, 'name')
-resource_property(Campaign, 'standard_delivery', transform=TRANSFORM.BOOL)
-resource_property(Campaign, 'start_time', transform=TRANSFORM.TIME)
-resource_property(Campaign, 'total_budget_amount_local_micro')
 # sdk-only
 resource_property(Campaign, 'to_delete', transform=TRANSFORM.BOOL)
 
 
 class LineItem(Analytics, Resource, Persistence, Batch):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     BATCH_RESOURCE_COLLECTION = '/' + API_VERSION + '/batch/accounts/{account_id}/line_items'
     RESOURCE_COLLECTION = '/' + API_VERSION + '/accounts/{account_id}/line_items'
@@ -279,57 +205,16 @@ class LineItem(Analytics, Resource, Persistence, Batch):
             return TargetingCriteria.load(self.account, id, **kwargs)
 
 
-# line item properties
-# read-only
-resource_property(LineItem, 'created_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(LineItem, 'deleted', readonly=True, transform=TRANSFORM.BOOL)
-resource_property(LineItem, 'id', readonly=True)
-resource_property(LineItem, 'updated_at', readonly=True, transform=TRANSFORM.TIME)
-# writable
-resource_property(LineItem, 'advertiser_domain')
-resource_property(LineItem, 'advertiser_user_id')
-resource_property(LineItem, 'automatically_select_bid', transform=TRANSFORM.BOOL)
-resource_property(LineItem, 'bid_amount_local_micro')
-resource_property(LineItem, 'bid_type')
-resource_property(LineItem, 'bid_unit')
-resource_property(LineItem, 'campaign_id')
-resource_property(LineItem, 'categories', transform=TRANSFORM.LIST)
-resource_property(LineItem, 'charge_by')
-resource_property(LineItem, 'end_time', transform=TRANSFORM.TIME)
-resource_property(LineItem, 'entity_status')
-resource_property(LineItem, 'include_sentiment')
-resource_property(LineItem, 'lookalike_expansion')
-resource_property(LineItem, 'name')
-resource_property(LineItem, 'objective')
-resource_property(LineItem, 'optimization')
-resource_property(LineItem, 'placements', transform=TRANSFORM.LIST)
-resource_property(LineItem, 'primary_web_event_tag')
-resource_property(LineItem, 'product_type')
-resource_property(LineItem, 'start_time', transform=TRANSFORM.TIME)
-resource_property(LineItem, 'total_budget_amount_local_micro')
-resource_property(LineItem, 'tracking_tags')
 # sdk-only
 resource_property(LineItem, 'to_delete', transform=TRANSFORM.BOOL)
 
 
 class ScheduledPromotedTweet(Resource, Persistence):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     RESOURCE_COLLECTION = '/' + API_VERSION + '/accounts/{account_id}/scheduled_promoted_tweets'
     RESOURCE = '/' + API_VERSION + '/accounts/{account_id}/scheduled_promoted_tweets/{id}'
-
-
-# scheduled promoted tweets properties
-# read-only
-resource_property(ScheduledPromotedTweet, 'created_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(ScheduledPromotedTweet, 'deleted', readonly=True, transform=TRANSFORM.BOOL)
-resource_property(ScheduledPromotedTweet, 'id', readonly=True)
-resource_property(ScheduledPromotedTweet, 'tweet_id', readonly=True)
-resource_property(ScheduledPromotedTweet, 'updated_at', readonly=True, transform=TRANSFORM.TIME)
-# writable
-resource_property(ScheduledPromotedTweet, 'line_item_id')
-resource_property(ScheduledPromotedTweet, 'scheduled_tweet_id')
 
 
 class Tweet(object):
@@ -378,23 +263,14 @@ class Tweet(object):
 
 class UserSettings(Resource, Persistence):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     RESOURCE = '/' + API_VERSION + '/accounts/{account_id}/user_settings/{id}'
 
 
-# user settings properties
-# writable
-resource_property(UserSettings, 'notification_email')
-resource_property(UserSettings, 'contact_phone')
-resource_property(UserSettings, 'contact_phone_extension')
-resource_property(UserSettings, 'subscribed_email_types')
-resource_property(UserSettings, 'user_id')
-
-
 class TaxSettings(Resource, Persistence):
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     RESOURCE = '/' + API_VERSION + '/accounts/{account_id}/tax_settings'
 
@@ -416,33 +292,3 @@ class TaxSettings(Resource, Persistence):
             self.account.client, 'put',
             resource, params=self.to_params()).perform()
         return self.from_response(response.body['data'])
-
-
-# tax settings properties
-# writable
-resource_property(TaxSettings, 'address_city')
-resource_property(TaxSettings, 'address_country')
-resource_property(TaxSettings, 'address_email')
-resource_property(TaxSettings, 'address_first_name')
-resource_property(TaxSettings, 'address_last_name')
-resource_property(TaxSettings, 'address_name')
-resource_property(TaxSettings, 'address_postal_code')
-resource_property(TaxSettings, 'address_region')
-resource_property(TaxSettings, 'address_street1')
-resource_property(TaxSettings, 'address_street2')
-resource_property(TaxSettings, 'bill_to')
-resource_property(TaxSettings, 'business_relationship')
-resource_property(TaxSettings, 'client_address_city')
-resource_property(TaxSettings, 'client_address_country')
-resource_property(TaxSettings, 'client_address_email')
-resource_property(TaxSettings, 'client_address_first_name')
-resource_property(TaxSettings, 'client_address_last_name')
-resource_property(TaxSettings, 'client_address_name')
-resource_property(TaxSettings, 'client_address_postal_code')
-resource_property(TaxSettings, 'client_address_region')
-resource_property(TaxSettings, 'client_address_street1')
-resource_property(TaxSettings, 'client_address_street2')
-resource_property(TaxSettings, 'invoice_jurisdiction')
-resource_property(TaxSettings, 'tax_category')
-resource_property(TaxSettings, 'tax_exemption_id')
-resource_property(TaxSettings, 'tax_id')

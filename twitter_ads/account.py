@@ -22,7 +22,7 @@ class Account(Resource):
     for the advertiser and nearly all interactions with the API.
     """
 
-    PROPERTIES = {}
+    PROPERTIES = []
 
     RESOURCE_COLLECTION = '/' + API_VERSION + '/accounts'
     RESOURCE = '/' + API_VERSION + '/accounts/{id}'
@@ -168,18 +168,3 @@ class Account(Resource):
         response = Request(self.client, 'get', resource, params=params).perform()
 
         return response.body['data']
-
-
-# account properties
-resource_property(Account, 'id', readonly=True)
-resource_property(Account, 'name', readonly=True)
-resource_property(Account, 'salt', readonly=True)
-resource_property(Account, 'timezone', readonly=True)
-resource_property(Account, 'approval_status', readonly=True)
-resource_property(Account, 'deleted', readonly=True, transform=TRANSFORM.BOOL)
-resource_property(Account, 'timezone_switch_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(Account, 'created_at', readonly=True, transform=TRANSFORM.TIME)
-resource_property(Account, 'updated_at', readonly=True, transform=TRANSFORM.TIME)
-# writable
-resource_property(Account, 'account_name')
-resource_property(Account, 'industry_type')
