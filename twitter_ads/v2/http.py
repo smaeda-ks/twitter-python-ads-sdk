@@ -73,7 +73,8 @@ class Request(object):
         if 'x-as-user' in self._client.options:
             headers['x-as-user'] = self._client.options.get('x-as-user')
 
-        params = self.options.get('params', None)
+        require_auth = True
+        params = self.options.get('params', {})
         data = self.options.get('body', None)
         files = self.options.get('files', None)
         stream = self.options.get('stream', False)
@@ -86,15 +87,13 @@ class Request(object):
         retry_count = 0
         retry_after = None
 
-        url = self.__domain() + "/" + version + "/" + self.resource
+        domain = self.__domain()
 
-        # Generate Authorization header string
-        headers['authorization'] = OAuth1.get_auth_header(
-            self.client,
-            self.method.upper(),
-            url,
-            params
-        )
+        if domain == self._DEFAULT_DOMAIN or domain == self._SANDBOX_DOMAIN:
+            url = domain + "/" + version + "/" + self.resource
+        else:
+            url = domain + self.resource
+            require_auth = False
 
         request_data = {
             'method': self.method,
@@ -108,6 +107,14 @@ class Request(object):
         }
 
         while (retry_count <= retry_max):
+            if require_auth:
+                # Generate Authorization header string
+                headers['authorization'] = OAuth1.get_auth_header(
+                    self.client,
+                    self.method.upper(),
+                    url,
+                    params
+                )
             # send request
             response = requests.request(
                 request_data['method'],

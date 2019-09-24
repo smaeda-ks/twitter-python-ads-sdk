@@ -133,6 +133,13 @@ RESOURCE_TABLE = {
     'active_entities': {
         'RESOURCE_COLLECTION': 'stats/accounts/{account_id}/active_entities'
     },
+    'analytics_sync_stats': {
+        'RESOURCE_COLLECTION': 'stats/accounts/{account_id}'
+    },
+    'analytics_async_jobs': {
+        'RESOURCE': 'stats/jobs/accounts/{account_id}/{id}',
+        'RESOURCE_COLLECTION': 'stats/jobs/accounts/{account_id}'
+    },
     'tailored_audiences': {
         'RESOURCE': 'accounts/{account_id}/tailored_audiences/{id}',
         'RESOURCE_COLLECTION': 'accounts/{account_id}/tailored_audiences'

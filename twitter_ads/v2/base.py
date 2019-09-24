@@ -1,5 +1,6 @@
 import json
 
+from urllib.parse import urlparse
 from twitter_ads.v2.http import Request
 from twitter_ads.v2.utils import FlattenParams, ResourceController
 from twitter_ads.v2.resources import RESOURCE_TABLE
@@ -498,6 +499,89 @@ class Base(object):
         """
         print('called active_entities()')
         return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('analytics_sync_stats', default_operation='all')
+    @FlattenParams
+    def analytics_sync_stats(self, endpoint_type, *, resource=None, **kwargs):
+        """Synchronous Analytics
+        https://developer.twitter.com/en/docs/ads/analytics/api-reference/synchronous
+
+        Supported `endpoint_type`:
+            `all` (default)
+
+        Args:
+            endpoint_type (:ojb:`str`, optional): An endpoint type.
+        """
+
+        # TODO: some helper functions here?
+        print('called analytics_sync_stats()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('analytics_async_jobs')
+    @FlattenParams
+    def analytics_async_jobs(self, endpoint_type, *, resource=None, **kwargs):
+        """Asynchronous Analytics
+        Retrieve details for some or all asynchronous analytics jobs for the current account.
+        https://developer.twitter.com/en/docs/ads/analytics/api-reference/asynchronous#get-stats-jobs-accounts-account-id
+        Cancel an asynchronous analytics job for a given ads account.
+        https://developer.twitter.com/en/docs/ads/analytics/api-reference/asynchronous#delete-stats-jobs-accounts-account-id-job-id
+
+        Supported `endpoint_type`:
+            `all`, `delete`
+
+        Args:
+            endpoint_type (str): An endpoint type.
+        """
+
+        # TODO: some helper functions here?
+        print('called analytics_async_jobs()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('analytics_async_create_job', default_operation='create')
+    @FlattenParams
+    def analytics_async_create_job(self, endpoint_type, *, resource=None, **kwargs):
+        """Asynchronous Analytics
+        Create an asynchronous analytics job for the current account.
+        https://developer.twitter.com/en/docs/ads/analytics/api-reference/asynchronous#post-stats-jobs-accounts-account-id
+
+        Supported `endpoint_type`:
+            `create` (default)
+
+        Args:
+            endpoint_type (:ojb:`str`, optional): An endpoint type.
+        """
+
+        # TODO: some helper functions here?
+        print('called analytics_async_create_job()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    def analytics_async_job_data(self, endpoint_type='load', *, url):
+        """Returns the results of the specified async job data URL.
+
+        Supported `endpoint_type`:
+            `load`
+
+        Args:
+            endpoint_type (str): An endpoint type.
+            url (str): A job data URL to download.
+        """
+        print('called analytics_async_job_data()')
+        # TODO: some helper functions here?
+        resource = urlparse(url)
+        domain = '{0}://{1}'.format(resource.scheme, resource.netloc)
+        print(domain)
+        print(resource.path)
+        return Request(
+            self,
+            self.METHOD_MAP[endpoint_type],
+            resource.path,
+            domain=domain,
+            raw_body=True,
+            stream=True).perform()
+
+
+
+
 
     @ResourceController('tailored_audiences')
     @FlattenParams
