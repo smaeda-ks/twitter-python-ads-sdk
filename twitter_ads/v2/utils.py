@@ -9,8 +9,7 @@ from time import mktime
 from functools import partial
 
 from twitter_ads import VERSION
-from twitter_ads.enum import GRANULARITY
-
+from twitter_ads.v2.enum import GRANULARITY
 from twitter_ads.v2.resources import RESOURCE_TABLE
 
 
