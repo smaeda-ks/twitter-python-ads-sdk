@@ -279,17 +279,223 @@ class Base(object):
         print('called targeting_suggestions()')
         return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
 
-    @ResourceController('targeting_criteria_locations')
+    @ResourceController('targeting_criteria_app_store_categories', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_app_store_categories(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_app_store_categories()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_behavior_taxonomies', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_behavior_taxonomies(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_behavior_taxonomies()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_behaviors', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_behaviors(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_behaviors()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_conversations', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_conversations(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_conversations()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_devices', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_devices(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_devices()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_events', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_events(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_events()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_interests', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_interests(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_interests()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_languages', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_languages(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_languages()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_locations', default_operation='all')
     @FlattenParams
     def targeting_criteria_locations(self, endpoint_type, *, resource=None, **kwargs):
 
         print('called targeting_criteria_locations()')
         return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
 
+    @ResourceController('targeting_criteria_network_operators', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_network_operators(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_network_operators()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_platform_versions', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_platform_versions(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_platform_versions()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_platforms', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_platforms(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_platforms()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_tv_markets', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_tv_markets(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_tv_markets()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('targeting_criteria_tv_shows', default_operation='all')
+    @FlattenParams
+    def targeting_criteria_tv_shows(self, endpoint_type, *, resource=None, **kwargs):
+
+        print('called targeting_criteria_tv_shows()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+
+
+
+
+
+
+    @ResourceController('account_media')
+    @FlattenParams
+    def account_media(self, endpoint_type, *, resource=None, **kwargs):
+        """Account Media
+        https://developer.twitter.com/en/docs/ads/creatives/api-reference/account-media
+
+        Supported `endpoint_type`:
+            `all`, `load`, `delete`
+
+        Args:
+            endpoint_type (str): An endpoint type.
+        """
+        print('called account_media()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('scheduled_tweets')
+    @FlattenParams
+    def scheduled_tweets(self, endpoint_type, *, resource=None, **kwargs):
+        """Scheduled Tweets
+        https://developer.twitter.com/en/docs/ads/creatives/api-reference/scheduled-tweets
+
+        Supported `endpoint_type`:
+            `all`, `load`, `create`, `update`, `delete`
+
+        Args:
+            endpoint_type (str): An endpoint type.
+        """
+        print('called scheduled_tweets()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('draft_tweets')
+    @FlattenParams
+    def draft_tweets(self, endpoint_type, *, resource=None, **kwargs):
+        """Draft Tweets
+        https://developer.twitter.com/en/docs/ads/creatives/api-reference/draft-tweets
+
+        Supported `endpoint_type`:
+            `all`, `load`, `create`, `update`, `delete`
+
+        Args:
+            endpoint_type (str): An endpoint type.
+        """
+        print('called draft_tweets()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    def draft_tweets_preview(self, endpoint_type='create', *,
+                             resource=None, draft_tweet_id):
+        """Draft Tweets Preview
+        https://developer.twitter.com/en/docs/ads/creatives/api-reference/draft-tweets#post-accounts-account-id-draft-tweets-preview-draft-tweet-id
+
+        Supported `endpoint_type`:
+            `create` (default)
+
+        Args:
+            endpoint_type (:obj:`str`, optional): An endpoint type.
+            draft_tweet_id (str): A Draft Tweet ID to preview.
+        """
+        print('called draft_tweets_preview()')
+        base = RESOURCE_TABLE['draft_tweets_preview']['RESOURCE']
+        resource = base.format(account_id=self.account_id, id=draft_tweet_id)
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params={}).perform()
+
+    @FlattenParams
+    def tweets(self, endpoint_type, *, resource=None, **kwargs):
+        """Tweets
+        https://developer.twitter.com/en/docs/ads/creatives/api-reference/tweets
+
+        Supported `endpoint_type`:
+            `all`, `create`
+
+        Args:
+            endpoint_type (str): An endpoint type.
+        """
+        print('called tweets()')
+        if endpoint_type == 'all':
+            base = RESOURCE_TABLE['tweets']['RESOURCE_GET']
+        else:
+            base = RESOURCE_TABLE['tweets']['RESOURCE_POST']
+        resource = base.format(account_id=self.account_id)
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('tweet_previews', default_operation='all')
+    @FlattenParams
+    def tweet_previews(self, endpoint_type, *, resource=None, **kwargs):
+        """Tweet Previews
+        https://developer.twitter.com/en/docs/ads/creatives/api-reference/tweet-previews
+
+        Supported `endpoint_type`:
+            `all`
+
+        Args:
+            endpoint_type (:obj:`str`, optional): An endpoint type.
+        """
+        print('called tweet_previews()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+
+
+
+
+
     @ResourceController('active_entities', default_operation='all')
     @FlattenParams
-    def active_entities(self, endpoint_type='all', *, resource=None, **kwargs):
+    def active_entities(self, endpoint_type, *, resource=None, **kwargs):
+        """Active Entities
+        https://developer.twitter.com/en/docs/ads/analytics/api-reference/active-entities
 
+        Supported `endpoint_type`:
+            `all` (default)
+
+        Args:
+            endpoint_type (:ojb:`str`, optional): An endpoint type.
+        """
         print('called active_entities()')
         return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
 

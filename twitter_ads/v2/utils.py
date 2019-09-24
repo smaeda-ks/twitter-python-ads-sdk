@@ -118,18 +118,24 @@ class ResourceController(object):
     def __init__(self, resource, override=None, default_operation=None, has_batch=False):
         self._resource = resource
         self._override = override
-        self._operation = default_operation
+        self._default_operation = default_operation
         self._has_batch = has_batch
 
     def __call__(self, decorated, *args, **kwargs):
         def wrapper(*args, **kwargs):
+            params = kwargs
             instance = args[0]
-            if self._operation:
-                operation = self._operation
-            else:
-                operation = args[1]
-
             operation_types = ['all', 'load', 'update', 'create', 'batch', 'delete']
+            if self._default_operation:
+                if (len(args) > 1 and args[1] in operation_types) or\
+                   (params.get('endpoint_type') is not None):
+                    operation = params.get('endpoint_type') or args[1]
+                else:
+                    operation = self._default_operation
+                    params['endpoint_type'] = operation
+            else:
+                operation = params.get('endpoint_type') or args[1]
+
             if operation not in operation_types:
                 raise NotImplementedError
 
@@ -149,7 +155,6 @@ class ResourceController(object):
                     id=kwargs.get('id', None)
                 )
             elif operation == 'batch':
-                params = kwargs
                 params['data'] = json.dumps(params.get('data', []))
                 headers = {'content-type': 'application/json'}
                 base = RESOURCE_TABLE[self._resource]['BATCH']

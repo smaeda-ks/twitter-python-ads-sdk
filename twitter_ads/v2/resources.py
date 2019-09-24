@@ -66,8 +66,69 @@ RESOURCE_TABLE = {
     'targeting_suggestions': {
         'RESOURCE_COLLECTION': 'accounts/{account_id}/targeting_suggestions'
     },
+    'targeting_criteria_app_store_categories': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/app_store_categories'
+    },
+    'targeting_criteria_behavior_taxonomies': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/behavior_taxonomies'
+    },
+    'targeting_criteria_behaviors': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/behaviors'
+    },
+    'targeting_criteria_conversations': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/conversations'
+    },
+    'targeting_criteria_devices': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/devices'
+    },
+    'targeting_criteria_events': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/events'
+    },
+    'targeting_criteria_interests': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/interests'
+    },
+    'targeting_criteria_languages': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/languages'
+    },
     'targeting_criteria_locations': {
         'RESOURCE_COLLECTION': 'targeting_criteria/locations'
+    },
+    'targeting_criteria_network_operators': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/network_operators'
+    },
+    'targeting_criteria_platform_versions': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/platform_versions'
+    },
+    'targeting_criteria_platforms': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/platforms'
+    },
+    'targeting_criteria_tv_markets': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/tv_markets'
+    },
+    'targeting_criteria_tv_shows': {
+        'RESOURCE_COLLECTION': 'targeting_criteria/tv_shows'
+    },
+    'account_media': {
+        'RESOURCE': 'accounts/{account_id}/account_media/{id}',
+        'RESOURCE_COLLECTION': 'accounts/{account_id}/account_media'
+    },
+    'scheduled_tweets': {
+        'RESOURCE': 'accounts/{account_id}/scheduled_tweets/{id}',
+        'RESOURCE_COLLECTION': 'accounts/{account_id}/scheduled_tweets'
+    },
+    'draft_tweets': {
+        'RESOURCE': 'accounts/{account_id}/draft_tweets/{id}',
+        'RESOURCE_COLLECTION': 'accounts/{account_id}/draft_tweets'
+    },
+    'draft_tweets_preview': {
+        'RESOURCE': 'accounts/{account_id}/draft_tweets/preview/{id}',
+    },
+    'tweets': {
+        'RESOURCE_GET': 'accounts/{account_id}/tweets',
+        'RESOURCE_POST': 'accounts/{account_id}/tweet',
+    },
+    'tweet_previews': {
+        'RESOURCE_COLLECTION': 'accounts/{account_id}/tweet_previews'
     },
     'active_entities': {
         'RESOURCE_COLLECTION': 'stats/accounts/{account_id}/active_entities'
