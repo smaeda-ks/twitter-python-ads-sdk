@@ -115,9 +115,8 @@ class FlattenParams(object):
 
 
 class ResourceController(object):
-    def __init__(self, resource, override=None, default_operation=None, has_batch=False):
+    def __init__(self, resource, default_operation=None, has_batch=False):
         self._resource = resource
-        self._override = override
         self._default_operation = default_operation
         self._has_batch = has_batch
 
@@ -125,6 +124,7 @@ class ResourceController(object):
         def wrapper(*args, **kwargs):
             params = kwargs.copy()
             instance = args[0]
+            account_id = instance.account_id
             operation_types = ['all', 'load', 'update', 'create', 'batch', 'delete']
             if self._default_operation:
                 if (len(args) > 1 and args[1] in operation_types) or\
@@ -140,12 +140,6 @@ class ResourceController(object):
             if operation not in operation_types:
                 raise NotImplementedError
 
-            if self._override is not None:
-                if self._override.get('account_id'):
-                    account_id = kwargs.get(self._override.get('account_id'))
-            else:
-                account_id = instance.account_id
-
             if operation in ['all', 'create']:
                 base = RESOURCE_TABLE[self._resource]['RESOURCE_COLLECTION']
                 resource = base.format(account_id=account_id)
@@ -153,7 +147,7 @@ class ResourceController(object):
                 base = RESOURCE_TABLE[self._resource]['RESOURCE']
                 resource = base.format(
                     account_id=account_id,
-                    id=kwargs.get('id', None)
+                    id=params.get('id', None)
                 )
             elif operation == 'batch':
                 params['data'] = json.dumps(params.get('data', []))

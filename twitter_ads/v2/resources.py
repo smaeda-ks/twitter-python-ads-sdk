@@ -1,9 +1,9 @@
-"""Container for all enum values used by the Ads API SDK."""
+"""List of the supported API endpoints' resource path."""
 
 
 RESOURCE_TABLE = {
     'accounts': {
-        'RESOURCE': 'accounts/{account_id}',
+        'RESOURCE': 'accounts/{id}',
         'RESOURCE_COLLECTION': 'accounts'
     },
     'authenticated_user_access': {
@@ -108,6 +108,16 @@ RESOURCE_TABLE = {
     'targeting_criteria_tv_shows': {
         'RESOURCE_COLLECTION': 'targeting_criteria/tv_shows'
     },
+    'reach_estimate': {
+        'RESOURCE_COLLECTION': 'accounts/{account_id}/reach_estimate'
+    },
+    'tax_settings': {
+        'RESOURCE': 'accounts/{account_id}/tax_settings',
+        'RESOURCE_COLLECTION': 'accounts/{account_id}/tax_settings'
+    },
+    'user_settings': {
+        'RESOURCE': 'accounts/{account_id}/user_settings/{id}'
+    },
     'account_media': {
         'RESOURCE': 'accounts/{account_id}/account_media/{id}',
         'RESOURCE_COLLECTION': 'accounts/{account_id}/account_media'
@@ -140,11 +150,32 @@ RESOURCE_TABLE = {
         'RESOURCE': 'stats/jobs/accounts/{account_id}/{id}',
         'RESOURCE_COLLECTION': 'stats/jobs/accounts/{account_id}'
     },
+    'reach_frequency_campaigns': {
+        'RESOURCE_COLLECTION': 'stats/accounts/{account_id}/reach/campaigns'
+    },
+    'reach_frequency_funding_instruments': {
+        'RESOURCE_COLLECTION': 'stats/accounts/{account_id}/reach/funding_instruments'
+    },
     'tailored_audiences': {
         'RESOURCE': 'accounts/{account_id}/tailored_audiences/{id}',
         'RESOURCE_COLLECTION': 'accounts/{account_id}/tailored_audiences'
     },
     'tailored_audiences_users': {
         'RESOURCE': 'accounts/{account_id}/tailored_audiences/{id}/users'
-    }
+    },
+    'tailored_audience_permissions': {
+        'RESOURCE': ('accounts/{account_id}/tailored_audiences/{tailored_audience_id}/'
+                     'permissions/{tailored_audience_permission_id}'),
+        'RESOURCE_COLLECTION': ('accounts/{account_id}/tailored_audiences/{tailored_audience_id}/'
+                                'permissions')
+    },
+    'insights': {
+        'RESOURCE_COLLECTION': 'insights/accounts/{account_id}'
+    },
+    'insights_available_audiences': {
+        'RESOURCE_COLLECTION': 'insights/accounts/{account_id}/available_audiences'
+    },
+    'keyword_insights': {
+        'RESOURCE_COLLECTION': 'insights/keywords/search'
+    },
 }

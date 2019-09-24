@@ -17,7 +17,7 @@ class Base(object):
         'batch': 'POST'
     }
 
-    @ResourceController('accounts', override={'account_id': 'id'})
+    @ResourceController('accounts')
     @FlattenParams
     def accounts(self, endpoint_type, *, resource=None, **kwargs):
         """Accounts
@@ -378,11 +378,50 @@ class Base(object):
         print('called targeting_criteria_tv_shows()')
         return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
 
+    @ResourceController('reach_estimate', default_operation='all')
+    @FlattenParams
+    def reach_estimate(self, endpoint_type, *, resource=None, **kwargs):
+        """Reach Estimate
+        https://developer.twitter.com/en/docs/ads/campaign-management/api-reference/reach-estimate
 
+        Supported `endpoint_type`:
+            `all`
 
+        Args:
+            endpoint_type (:obj:`str`, optional): An endpoint type.
+        """
+        print('called reach_estimate()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
 
+    @ResourceController('tax_settings')
+    @FlattenParams
+    def tax_settings(self, endpoint_type, *, resource=None, **kwargs):
+        """Tax Settings
+        https://developer.twitter.com/en/docs/ads/campaign-management/api-reference/tax-settings
 
+        Supported `endpoint_type`:
+            `all`, `update`
 
+        Args:
+            endpoint_type (str): An endpoint type.
+        """
+        print('called tax_settings()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('user_settings')
+    @FlattenParams
+    def user_settings(self, endpoint_type, *, resource=None, **kwargs):
+        """User Settings
+        https://developer.twitter.com/en/docs/ads/campaign-management/api-reference/user-settings
+
+        Supported `endpoint_type`:
+            `load`, `update`
+
+        Args:
+            endpoint_type (str): An endpoint type.
+        """
+        print('called user_settings()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
 
     @ResourceController('account_media')
     @FlattenParams
@@ -579,9 +618,35 @@ class Base(object):
             raw_body=True,
             stream=True).perform()
 
+    @ResourceController('reach_frequency_campaigns', default_operation='all')
+    @FlattenParams
+    def reach_frequency_campaigns(self, endpoint_type, *, resource=None, **kwargs):
+        """Reach and Average Frequency (campaigns)
+        https://developer.twitter.com/en/docs/ads/analytics/api-reference/reach#get-stats-accounts-account-id-reach-campaigns
 
+        Supported `endpoint_type`:
+            `all` (default)
 
+        Args:
+            endpoint_type (:ojb:`str`, optional): An endpoint type.
+        """
+        print('called reach_frequency_campaigns()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
 
+    @ResourceController('reach_frequency_funding_instruments', default_operation='all')
+    @FlattenParams
+    def reach_frequency_funding_instruments(self, endpoint_type, *, resource=None, **kwargs):
+        """Reach and Average Frequency (funding_instruments)
+        https://developer.twitter.com/en/docs/ads/analytics/api-reference/reach#get-stats-accounts-account-id-reach-funding-instruments
+
+        Supported `endpoint_type`:
+            `all` (default)
+
+        Args:
+            endpoint_type (:ojb:`str`, optional): An endpoint type.
+        """
+        print('called reach_frequency_funding_instruments()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
 
     @ResourceController('tailored_audiences')
     @FlattenParams
@@ -621,3 +686,76 @@ class Base(object):
             headers={'content-type': 'application/json'},
             params={},
             body=json.dumps(data)).perform()
+
+    @FlattenParams
+    def tailored_audience_permissions(self, endpoint_type, *, resource=None, **kwargs):
+        """Tailored Audience Permissions
+        https://developer.twitter.com/en/docs/ads/audiences/api-reference/tailored-audience-permissions
+
+        Supported `endpoint_type`:
+            `all`, `create`, `delete`
+
+        Args:
+            endpoint_type (str): An endpoint type.
+        """
+        print('called tailored_audience_permissions()')
+        if endpoint_type in ['all', 'create']:
+            base = RESOURCE_TABLE['tailored_audience_permissions']['RESOURCE_COLLECTION']
+            resource = base.format(
+                account_id=self.account_id,
+                tailored_audience_id=kwargs.get('tailored_audience_id')
+            )
+        elif endpoint_type == 'delete':
+            base = RESOURCE_TABLE['tailored_audience_permissions']['RESOURCE']
+            resource = base.format(
+                account_id=self.account_id,
+                tailored_audience_id=kwargs.get('tailored_audience_id'),
+                tailored_audience_permission_id=kwargs.get('tailored_audience_permission_id')
+            )
+        else:
+            raise NotImplementedError
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('insights', default_operation='all')
+    @FlattenParams
+    def insights(self, endpoint_type, *, resource=None, **kwargs):
+        """Insights
+        https://developer.twitter.com/en/docs/ads/audiences/api-reference/insights
+
+        Supported `endpoint_type`:
+            `all` (default)
+
+        Args:
+            endpoint_type (:ojb:`str`, optional): An endpoint type.
+        """
+        print('called insights()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('insights_available_audiences', default_operation='all')
+    def insights_available_audiences(self, endpoint_type, *, resource=None, **kwargs):
+        """Insights (available_audiences)
+        https://developer.twitter.com/en/docs/ads/audiences/api-reference/insights#get-insights-accounts-account-id-available-audiences
+
+        Supported `endpoint_type`:
+            `all` (default)
+
+        Args:
+            endpoint_type (:ojb:`str`, optional): An endpoint type.
+        """
+        print('called insights_available_audiences()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
+
+    @ResourceController('keyword_insights', default_operation='all')
+    @FlattenParams
+    def keyword_insights(self, endpoint_type, *, resource=None, **kwargs):
+        """Keyword Insights
+        https://developer.twitter.com/en/docs/ads/audiences/api-reference/keyword-insights
+
+        Supported `endpoint_type`:
+            `all` (default)
+
+        Args:
+            endpoint_type (:ojb:`str`, optional): An endpoint type.
+        """
+        print('called keyword_insights()')
+        return Request(self, self.METHOD_MAP[endpoint_type], resource, params=kwargs).perform()
