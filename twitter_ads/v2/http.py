@@ -10,10 +10,10 @@ import time
 import requests
 import http.client as httplib
 
-from twitter_ads.v2.oauth import OAuth1
 from twitter_ads import API_VERSION
-from twitter_ads.utils import get_version
-from twitter_ads.error import Error
+from twitter_ads.v2.oauth import OAuth1
+from twitter_ads.v2.utils import get_version
+from twitter_ads.v2.error import Error
 
 
 class Request(object):
