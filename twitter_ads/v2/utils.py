@@ -1,6 +1,7 @@
 """Container for all helpers and utilities used throughout the Ads API SDK."""
 
 import datetime
+import copy
 import json
 import warnings
 warnings.simplefilter('default', DeprecationWarning)
@@ -101,13 +102,13 @@ class FlattenParams(object):
         if ('batch' in args) or (kwargs.get('endpoint_type') == 'batch'):
             return self._func(instance, *args, **kwargs)
 
-        params = kwargs
+        params = {k: v for k, v in kwargs.items() if v is not None}
         for i in params:
             if isinstance(params[i], list):
                 params[i] = ','.join(map(str, params[i]))
             elif isinstance(params[i], bool):
                 params[i] = str(params[i]).lower()
-        return self._func(instance, *args, **kwargs)
+        return self._func(instance, *args, **params)
 
     def __get__(self, instance, owner):
         return partial(self, instance)
@@ -122,7 +123,7 @@ class ResourceController(object):
 
     def __call__(self, decorated, *args, **kwargs):
         def wrapper(*args, **kwargs):
-            params = kwargs
+            params = kwargs.copy()
             instance = args[0]
             operation_types = ['all', 'load', 'update', 'create', 'batch', 'delete']
             if self._default_operation:
@@ -133,6 +134,7 @@ class ResourceController(object):
                     operation = self._default_operation
                     params['endpoint_type'] = operation
             else:
+                # TODO: error handling in case missing
                 operation = params.get('endpoint_type') or args[1]
 
             if operation not in operation_types:
@@ -160,7 +162,7 @@ class ResourceController(object):
                 resource = base.format(account_id=account_id)
                 return decorated(*args, resource=resource, headers=headers, **params)
 
-            return decorated(*args, resource=resource, **kwargs)
+            return decorated(*args, resource=resource, **params)
         return wrapper
 
     def __get__(self, instance, owner):
